@@ -122,7 +122,8 @@ function M.select_mv_cmd(from, to, cwd)
 end
 
 function M.select_download_commands(repo, project_name, cache_folder, revision)
-  local can_use_tar = vim.fn.executable "tar" == 1 and vim.fn.executable "curl" == 1
+  -- 不使用curl下载，会出现网络错误，使用git，可以设置代理加速，这里改成curl1，走false分支，使用git下载
+  local can_use_tar = vim.fn.executable "tar" == 1 and vim.fn.executable "curl1" == 1
   local is_github = repo.url:find("github.com", 1, true)
   local is_gitlab = repo.url:find("gitlab.com", 1, true)
 
